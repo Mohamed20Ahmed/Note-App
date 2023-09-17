@@ -1,3 +1,4 @@
+//create class note and export it
 exports.Note = class Note {
   constructor(id, title, content, createdBy, createdOn) {
     this.id = id;
