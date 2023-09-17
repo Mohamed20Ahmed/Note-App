@@ -3,15 +3,8 @@ const memoryStorage = require("../Util/memoryStorage");
 const Note = require("../model/noteModel").Note;
 
 exports.getAllNotes = function (req, res) {
-  // let id1 = generator.generate();
-  // memorystorage.store.setItem(id1, "Fisrt");
-  // let id2 = generator.generate();
-  // memorystorage.store.setItem(id2, "Second");
-  // let keys = memorystorage.getKeys(memorystorage.store);
-  // let values = memorystorage.getValues(memorystorage.store);
-  // let note = new Note(1, "x", "y", "z", new Date());
-  // console.log(JSON.stringify(note));
-  // res.send("Get All Notes " + JSON.stringify(keys));
+  let values = memoryStorage.getValues(memoryStorage.store);
+  res.status(200).send(values);
 };
 
 exports.addNote = function (req, res) {
