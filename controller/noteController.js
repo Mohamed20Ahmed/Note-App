@@ -17,15 +17,31 @@ exports.addNote = function (req, res) {
     new Date()
   );
 
-  if (!req.body.title || !req.body.content || !req.body.createdBy) {
+  if (!note.title || !note.content || !note.createdBy) {
     return res.status(404).send({ error: "Please Enter All Fields" });
   }
   memoryStorage.store.setItem(id, note);
-  res.status(200).send("Note Added Successfully");
+  res.status(201).send("Note Added Successfully");
 };
 
 exports.updateNote = function (req, res) {
-  res.send("Update Note");
+  let note = new Note(
+    req.body.id,
+    req.body.title,
+    req.body.content,
+    req.body.createdBy,
+    new Date()
+  );
+
+  if (!note.id || !note.title || !note.content || !note.createdBy) {
+    return res.status(404).send({ error: "Please Enter All Fields" });
+  }
+  let noteExistence = memoryStorage.store.getItem(note.id);
+  if (!noteExistence) {
+    return res.status(404).send({ error: "Id Not Found" });
+  }
+  memoryStorage.store.setItem(note.id, note);
+  res.status(200).send("Note Updated Successfully");
 };
 
 exports.deleteNote = function (req, res) {
